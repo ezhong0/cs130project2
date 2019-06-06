@@ -246,7 +246,6 @@ std::string AVLTree::rangeRRHelper(Node* n, int ub){
 }
 
 std::string AVLTree::toTool(int left, int right){
-    std::cout<<left<<right;
     if(left != MININT)
         left++;
     if(right != MAXINT)
