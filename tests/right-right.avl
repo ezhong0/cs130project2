@@ -1,0 +1,5 @@
+insert 50 40 60 55
+print left-right
+
+mminsert 2
+print tree
