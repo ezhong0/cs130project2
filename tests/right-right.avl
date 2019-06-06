@@ -1,5 +1,5 @@
-insert 50 40 60 55
-print left-right
+insert 0 1
+print right-right
 
-mminsert 2
+insert 2
 print tree

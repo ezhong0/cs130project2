@@ -25,14 +25,14 @@ int main(int argc, char** argv){
             int numTotal = 0;
             while(true){
                 nextPos = nextLine.find(' ', pos+1);
-                if(tree.insert(stoi(nextLine.substr(pos, nextPos))))
-                    numTotal++;
+                tree.insert(stoi(nextLine.substr(pos, nextPos)));
+                numTotal++;
                 pos = nextPos;
                 if(nextPos == int(std::string::npos)) break;
             }
             std::cout << "Added " << tree.getNumAdded() << " of " << numTotal << " nodes.\n"
-                    << "Visited " << tree.getNumVisited() << " (" << tree.getNumVisited()/numTotal << ") nodes and performed " 
-                    << tree.getNumRotations() << " (" << tree.getNumRotations()/numTotal << ") rotations.\n";
+                    << "Visited " << tree.getNumVisited() << " (" << static_cast<double>(tree.getNumVisited())/static_cast<double>(numTotal) << ") nodes and performed " 
+                    << tree.getNumRotations() << " (" << static_cast<double>(tree.getNumRotations())/static_cast<double>(numTotal) << ") rotations.\n";
             tree.resetStats();
         } else if(nextLine.substr(0, 7) == "lookup "){
             std::string resultStr = "";
@@ -44,7 +44,7 @@ int main(int argc, char** argv){
                 nextPos = nextLine.find(' ', pos+1);
                 std::string nextStr = nextLine.substr(pos, nextPos-pos);
                 if(tree.lookup(stoi(nextStr))){
-                    resultStr += nextStr + ", ";
+                    resultStr += nextStr + ",";
                     numFound++;
                 }
                 numTotal++;
@@ -52,9 +52,9 @@ int main(int argc, char** argv){
                 if(nextPos == int(std::string::npos)) break;
             }
             std::cout << "Found " << numFound << " of " << numTotal << " nodes: ["
-                << resultStr.substr(0, resultStr.length() - 2) << "]\n"
-                << "Visited " << tree.getNumVisited() << " (" << tree.getNumVisited()/numTotal << ") nodes and performed "
-                << tree.getNumRotations() << " (" << tree.getNumRotations()/numTotal << ") rotations.\n";
+                << resultStr.substr(0, resultStr.length() - 1) << "]\n"
+                << "Visited " << tree.getNumVisited() << " (" << static_cast<double>(tree.getNumVisited())/static_cast<double>(numTotal) << ") nodes and performed "
+                << tree.getNumRotations() << " (" << static_cast<double>(tree.getNumRotations())/static_cast<double>(numTotal) << ") rotations.\n";
             tree.resetStats();
         } else if(nextLine.substr(0, 6) == "print "){
             if(nextLine.substr(6, 10) == "tree"){

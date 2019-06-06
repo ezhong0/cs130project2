@@ -104,9 +104,9 @@ std::string AVLTree::print(){
 std::string AVLTree::printHelper(Node* n, int h){
     std::string result = "";
     for(int i=0; i<h; i++)
-        result += " ";
+        result += "  ";
     if(n == NULL){
-        result += "NULL\n";
+        result += "Null\n";
         return result;
     }
 
@@ -171,8 +171,7 @@ std::string AVLTree::rangeLL(){
     str = str.substr(0, str.length() - 2);
     if(str.length() == 0)
         return "No inserts would cause a left-left rotation.\n";
-    else
-        return "The following inserts would cause a left-left rotation:\n" + str + "\n";
+    return "The following inserts would cause a left-left rotation:\n" + str + "\n";
 }
 
 std::string AVLTree::rangeLLHelper(Node* n, int lb){
@@ -182,8 +181,7 @@ std::string AVLTree::rangeLLHelper(Node* n, int lb){
         return rangeLLHelper(n->right, n->key);
     if(getHeight(n->right) - getHeight(n->left) == -1 && getHeight(n->left->right) - getHeight(n->left->left) != -1)
         return toTool(lb, n->left->key) + ", " + rangeLLHelper(n->right, n->key);
-    else
-        return rangeLLHelper(n->left, lb) + rangeLLHelper(n->right, n->key);
+    return rangeLLHelper(n->left, lb) + rangeLLHelper(n->right, n->key);
 }
 
 std::string AVLTree::rangeLR(){
@@ -191,8 +189,7 @@ std::string AVLTree::rangeLR(){
     str = str.substr(0, str.length() - 2);
     if(str.length() == 0)
         return "No inserts would cause a left-right rotation.\n";
-    else
-        return "The following inserts would cause a left-right rotation:\n" + str + "\n";
+    return "The following inserts would cause a left-right rotation:\n" + str + "\n";
 }
 
 std::string AVLTree::rangeLRHelper(Node* n){
@@ -202,8 +199,7 @@ std::string AVLTree::rangeLRHelper(Node* n){
         return rangeLRHelper(n->right);
     if(getHeight(n->right) - getHeight(n->left) == -1 && getHeight(n->left->right) - getHeight(n->left->left) != 1)
         return toTool(n->left->key, n->key) + ", " + rangeLRHelper(n->right);
-    else
-        return rangeLRHelper(n->left) + rangeLRHelper(n->right);
+    return rangeLRHelper(n->left) + rangeLRHelper(n->right);
 }
 
 std::string AVLTree::rangeRL(){
@@ -211,19 +207,17 @@ std::string AVLTree::rangeRL(){
     str = str.substr(0, str.length() - 2);
     if(str.length() == 0)
         return "No inserts would cause a right-left rotation.\n";
-    else
-        return "The following inserts would cause a right-left rotation:\n" + str + "\n";
+    return "The following inserts would cause a right-left rotation:\n" + str + "\n";
 }
 
 std::string AVLTree::rangeRLHelper(Node* n){
     if(n == NULL)
         return "";
-    if(n->left == NULL)
+    if(n->right == NULL)
         return rangeRLHelper(n->left);
-    if(getHeight(n->right) - getHeight(n->left) == -1 && getHeight(n->left->right) - getHeight(n->left->left) != 1)
-        return rangeRLHelper(n->right) + ", " + toTool(n->left->key, n->key);
-    else
-        return rangeRLHelper(n->left) + rangeRLHelper(n->right);
+    if((getHeight(n->right) - getHeight(n->left) == 1) && (getHeight(n->right->right) - getHeight(n->right->left) != -1))
+        return rangeRLHelper(n->left) + toTool(n->key, n->right->key) + ", ";
+    return rangeRLHelper(n->left) + rangeRLHelper(n->right);
 }
 
 std::string AVLTree::rangeRR(){
@@ -231,8 +225,7 @@ std::string AVLTree::rangeRR(){
     str = str.substr(0, str.length() - 2);
     if(str.length() == 0)
         return "No inserts would cause a right-right rotation.\n";
-    else
-        return "The following inserts would cause a right-right rotation:\n" + str + "\n";
+    return "The following inserts would cause a right-right rotation:\n" + str + "\n";
 }
 
 std::string AVLTree::rangeRRHelper(Node* n, int ub){
